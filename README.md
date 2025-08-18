@@ -1,2 +1,2 @@
 # JFET_METER
-Based on Arduino, measuring JFET Idss.
+Jfet is treaky. But that treaky make JFET irreplaceable, especially in audio. So, how I deal with it? Usually, measuring and screening for Idss. It varies
