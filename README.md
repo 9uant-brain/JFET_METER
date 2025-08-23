@@ -7,6 +7,10 @@ That said, there’s a parameter more informative than Idss: Vgm (i.e., transcon
 1. Idss is much easier to measure. It’s simply the drain current at zero gate bias. Estimating gm requires measuring several Id points at different Vgs values to determine the slope.
 2. Idss correlates with gm, so it’s a useful and valid proxy for quick screening, despite being simpler.
 
-----
 
-To measure Idss, you have to set up a basic JFET circuit. And measuring voltage, and calculate current via ohm's law. I could do it, with multimeter and breadboard. But I wanted more convinient, sophisticated way to measure Idss.
+To measure Idss, you need to set up a basic JFET circuit, measure the voltage, and calculate the current using Ohm’s law. I could have done this with just a multimeter and a breadboard, but I wanted a more convenient and sophisticated way to measure Idss. 
+
+I could have simply bought a cheap Chinese tester, but I also wanted to test myself to see if I could actually build it. The cost saving was just a bonus. 
+
+## System Overview
+To automate Idss measuring process, I needed MCU. Arduino nano was seemed perfect for the purpose, because it is very cheap, versatile and easy to learn to use. I could get it just for $2. Also I needed a display to make the measurement values easy to read. Those are sufficient just for measuring Idss.
