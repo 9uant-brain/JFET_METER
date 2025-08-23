@@ -8,7 +8,7 @@ That said, there’s a parameter more informative than Idss: Vgm (i.e., transcon
 2. Idss correlates with gm, so it’s a useful and valid proxy for quick screening, despite being simpler.
 
 
-To measure Idss, you need to set up a basic JFET circuit, measure the voltage, and calculate the current using Ohm’s law. I could have done this with just a multimeter and a breadboard, but I wanted a more convenient and sophisticated way to measure Idss. 
+To measure Idss, you need to set up a basic JFET circuit, measure the voltage, and calculate the current using Ohm’s law. I could have done this with just a multimeter and a breadboard, but I wanted a more convenient and sophisticated way to measure Idss — especially when dealing with multiple JFETs.
 
 I could have simply bought a cheap Chinese tester, but I also wanted to test myself to see if I could actually build it. The cost saving was just a bonus. 
 
