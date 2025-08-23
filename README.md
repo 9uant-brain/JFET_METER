@@ -12,5 +12,17 @@ To measure Idss, you need to set up a basic JFET circuit, measure the voltage, a
 
 I could have simply bought a cheap Chinese tester, but I also wanted to test myself to see if I could actually build it. The cost saving was just a bonus. 
 
-## System Overview
-To automate Idss measuring process, I needed MCU. Arduino nano was seemed perfect for the purpose, because it is very cheap, versatile and easy to learn to use. I could get it just for $2. Also I needed a display to make the measurement values easy to read. Those are sufficient just for measuring Idss.
+## Hardware setup
+To automate the Idss measuring process, I needed a microcontroller. The Arduino Nano was a perfect fit for this purpose due to its low cost, versatility, and ease of use—I could get one for just $2.
+
+I also needed a display to easily show the measurement results. This setup, consisting of only an Arduino and a display, is sufficient for measuring Idss. The diagram and circuit below illustrate the hardware configuration:
+
+<p align="center">
+  <img src= asset/diagram.png width="80%" height="80%">
+</p>
+
+<p align="center">
+  <img src= asset/sch.png width="80%" height="80%">
+</p>
+
+The circuit is quite simple. D3 digital pin pulls the gate to ground, turning the JFET on. Then, A1 analog pin reads the drain voltage (Vd). Using Ohm’s law (I = V/R), the current (Idss) is calculated internally, where V = Vcc - Vd and R = R_Drain. The result is displayed on an OLED screen via the I²C protocol.
