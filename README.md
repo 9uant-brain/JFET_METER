@@ -13,7 +13,7 @@ To measure Idss, you need to set up a basic JFET circuit, measure the voltage, a
 I could have simply bought a cheap Chinese tester, but I also wanted to test myself to see if I could actually build it. The cost saving was just a bonus. 
 
 ## Hardware setup
-To automate the Idss measuring process, I needed a microcontroller. The Arduino Nano was a perfect fit for this purpose due to its low cost, versatility, and ease of use—I could get one for just $2.
+To automate the Idss measuring process, I needed a microcontroller. The Arduino Nano was a perfect fit for this purpose due to its low cost, versatility, and ease of use — I could get one for just $2.
 
 I also needed a display to easily show the measurement results. This setup, consisting of only an Arduino and a display, is sufficient for measuring Idss. The diagram and circuit below illustrate the hardware configuration:
 
@@ -29,7 +29,7 @@ The circuit is quite simple. D3 digital pin pulls the gate to ground, turning th
 
 ## Hardware Implementation
 
-Since this is not complex circuit, I built this on prototype pcb. And components are connected with jumper wire. You can see the completion in the picture below. You might see red module and header parrell sockets too, they are used for opamp tester (I am working on). Arduino and modules are attached with header socket.
+Since this is not a complex circuit, I built it on a prototype PCB, connecting the components with jumper wires. The completed circuit can be seen in the picture below. You may also notice the red module and parallel header sockets, which are used for an op-amp tester I am currently working on. The Arduino and other modules are attached using header sockets.
 
 <p align="center">
   <img src= asset/C1.jpg width="50%" height="50%">
@@ -39,7 +39,13 @@ Since this is not complex circuit, I built this on prototype pcb. And components
   <img src= asset/C2.jpg width="50%" height="50%">
 </p>
 
-There is a special gimmick on this board. You can see I highlighted 3 holes on the board, it is actually improvised TO92 transistor socket. Because at the time I built this board, I didn't have sockets. Above on it, you also can see 3 pin socket, but it was soldered later to attach bent lead transistors.
+There is a special feature on this board. I highlighted three holes on the PCB, which actually serve as an improvised TO-92 transistor socket, since I didn’t have proper sockets at the time I built it. Just above it, you can also see a three-pin socket that was soldered later to accommodate transistors with bent leads. I will explain how I improvised this in the next paragraph with pictures.
 
+<p align="center">
+  <img src= asset/C3.jpg width="50%" height="50%">
+</p>
 
-
+<p align="center">
+  <img src= asset/C4.jpg width="50%" height="50%">
+</p>
+It is simple. I lined up the TO-92 leads, marked the spacing, and drilled the holes with thin drill bits. Then, I inserted leftover leads through the holes and soldered them in place. They don’t hold the transistor leads tightly, but if I tilt the transistor while it’s plugged in, they make sufficient contact.
