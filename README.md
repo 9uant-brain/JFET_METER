@@ -49,3 +49,7 @@ There is a special feature on this board. I highlighted three holes on the PCB, 
   <img src= asset/C4.jpg width="50%" height="50%">
 </p>
 It is simple. I lined up the TO-92 leads, marked the spacing, and drilled the holes with thin drill bits. Then, I inserted leftover leads through the holes and soldered them in place. They don’t hold the transistor leads tightly, but if I tilt the transistor while it’s plugged in, they make sufficient contact.
+
+## Coding Process
+
+What is essential purpose of this hardware? It is measuring. But, arduino measurement varies because it only can measure relatively with VCC. And VCC, it fully depends on usb port which is powered by PC or usb adapters. They aren't same voltage.
