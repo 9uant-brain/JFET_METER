@@ -56,4 +56,5 @@ What is essential purpose of this hardware? It is measuring. But, arduino measur
 
 ### Calibration
 
-In arduino nano chip (ATmega328P), there is internal reference voltage (1.1V ±10%) mostly constant regardless of condition. So, if I compare this reference with VCC, I can figure out VCC value. If I measure internal voltage, it varies with VCC, as I explained, every voltage measurement are relative with VCC. 
+In arduino nano chip (ATmega328P), there is internal reference voltage (1.1V ±10%) mostly constant regardless of condition. So, if I compare this reference with VCC, I can figure out VCC value. If I measure internal voltage, it varies with VCC, as I explained, every voltage measurement are relativtiy with VCC. So, let's assume we measure internal voltage. Even internal 1.1V is still 1.1V, if exact VCC value didn't defined, its measurement never shown as 1.1V. But, we can work backwards with it. 
+If the measurement is higher than 1.1V, VCC have to be higher (measurement∝1.1/VCC). On the other hand, if the measurement is lower than 1.1V, VCC have to be lower (measurement∝1.1/VCC).
