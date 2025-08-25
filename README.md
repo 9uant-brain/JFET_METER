@@ -52,4 +52,8 @@ It is simple. I lined up the TO-92 leads, marked the spacing, and drilled the ho
 
 ## Coding Process
 
-What is essential purpose of this hardware? It is measuring. But, arduino measurement varies because it only can measure relatively with VCC. And VCC, it fully depends on usb port which is powered by PC or usb adapters. They aren't same voltage.
+What is essential purpose of this hardware? It is measuring. But, arduino measurement varies because it only can measure relatively with VCC. And VCC, it fully depends on usb port voltage which is powered by PC or usb adapters. They aren't same. Because of it, I had to add calibration code.
+
+### Calibration
+
+In arduino nano chip (ATmega328P), there is internal reference voltage (1.1V ±10%) mostly constant regardless of condition. So, if I compare this reference with VCC, I can figure out VCC value. If I measure internal voltage, it varies with VCC, as I explained, every voltage measurement are relative with VCC. 
