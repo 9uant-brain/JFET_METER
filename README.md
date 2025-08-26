@@ -89,7 +89,7 @@ void loop() {
   const float VCC_MEASURED = 4.37f;   // ── Directly measured VCC with multimeter
   float bandgap_V = (VCC_MEASURED * raw_avg) / 1023.0f;
 
-  // ── 출력
+  // ── Print result
   Serial.print("ADC raw(avg) = ");
   Serial.print(raw_avg);
   Serial.print(" , Bandgap(calc) = ");
@@ -98,5 +98,7 @@ void loop() {
 
   delay(1000);
 }
+```
+This is simple code for measuring internal voltage. Loading internal voltage raw data (0~1023) - averaging it 100 times - Through this formula(ADC raw = Vin / VCC * 1023), reverse interval voltage. If twist this formula, [bandgap_V = (VCC_MEASURED * raw_avg) / 1023] pops out.
 
 
