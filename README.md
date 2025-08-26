@@ -71,10 +71,12 @@ Unlike the internal reference, VCC can be measured directly through physical pin
 
 ```cpp
 int readBandgapRaw() {
-  ADMUX = _BV(REFS0) | 0x0E;  // inquire (internal bandgap/VCC)
-  delay(2);                   // wait for internal switching
-  (void)analogRead(A0);       // invalidate first measure for accuracy
-  return analogRead(A0);      // internal bandgap raw
+  ADMUX = _BV(REFS0) | 0x0E; // select internal 1.1V bandgap channel, reference = AVcc
+  delay(2);                  // give it a moment to settle after switching channel
+  ADCSRA |= _BV(ADSC);       // kick off conversion
+  while (ADCSRA & _BV(ADSC)) { }  // wait until conversion is done
+  return ADC;                // raw ADC value (0~1023)
+}
 }
 
 void setup() {
@@ -109,6 +111,5 @@ This is a simple code for measuring the internal voltage. It loads the internal 
 <p align="center">
   <img src= asset/print.png width="50%" height="50%">
 </p>
-This is the serial output from the code. It reports the bandgap voltage (internal voltage) at about 1.09 V. That’s not far from the nominal 1.10 V (≈0.9% low), but as I mentioned, I wanted to make it more precise.
-
+This is the serial output from the code. It reports the bandgap voltage (the internal reference) at about 1.1 V. It is essentially the same as the nominal value, but it was worth confirming, since the actual value can vary from chip to chip.
 ### Main code
