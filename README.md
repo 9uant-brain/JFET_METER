@@ -65,5 +65,38 @@ However, we can reverse this relationship. If we measure the internal reference 
 ---
 Before code calibration logic, I found out that internal voltage varies itself, by device. I wanted to make it clear, so I had to measure the specific internal voltage. But I can measure it directly via physical pins, I have to reverse it by ADC raw data. Do you remember this relationship? (adc measurement ∝ 1.1{internal voltage} / VCC). I can measure VCC directly with physical pins, and it won't change unless I use another usb port. So, I can reverse it with specific VCC value. 
 
+```cpp
+int readBandgapRaw() {
+  ADMUX = _BV(REFS0) | 0x0E;  // inquire (internal bandgap/VCC)
+  delay(2);                   // wait for intenal switching
+  (void)analogRead(A0);       // invalidate first measure for accuracy
+  return analogRead(A0);      // internal bandgap raw
+}
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  // 100 count averaging of internal bandgap raw
+  long sum = 0;
+  for (int i = 0; i < 100; i++) {
+    sum += readBandgapRaw();
+    delay(2);
+  }
+  int raw_avg = sum / 100;
+
+  const float VCC_MEASURED = 4.37f;   // ── Directly measured VCC with multimeter
+  float bandgap_V = (VCC_MEASURED * raw_avg) / 1023.0f;
+
+  // ── 출력
+  Serial.print("ADC raw(avg) = ");
+  Serial.print(raw_avg);
+  Serial.print(" , Bandgap(calc) = ");
+  Serial.print(bandgap_V, 3);
+  Serial.println(" V");
+
+  delay(1000);
+}
 
 
