@@ -17,13 +17,7 @@ To automate the Idss measuring process, I needed a microcontroller. The Arduino 
 
 I also needed a display to easily show the measurement results. This setup, consisting of only an Arduino and a display, is sufficient for measuring Idss. The diagram and circuit below illustrate the hardware configuration:
 
-<p align="center">
-  <img src= asset/diagram.png width="80%" height="80%">
-</p>
-
-<p align="center">
-  <img src= asset/sch.png width="80%" height="80%">
-</p>
+ㅣㅣ
 
 The circuit is quite simple. Gate and source are tied to GND to ensure Vgs = 0, keeping the channel fully open. Then, A1 analog pin reads the drain voltage (Vd). Using Ohm’s law (I = V/R), the current (Idss) is calculated internally, where V = Vcc - Vd and R = R_Drain. The result is displayed on an OLED screen via the I²C protocol.
 
