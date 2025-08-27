@@ -105,11 +105,94 @@ void loop() {
   delay(1000);
 }
 ```
-This is a simple code for measuring the internal voltage. It loads the internal voltage raw data (0–1023) and averages it over 100 samples. Using the formula ```ADC raw = Vin / VCC * 1023```, we can rearrange it to calculate the internal reference. When reversed, the formula becomes:
-```bandgap_V = (VCC_measured * raw_avg) / 1023```
+This is a simple code for measuring the internal voltage. It loads the internal voltage raw data (0–1023) and averages it over 100 samples. Using the formula ```ADC raw = Vinput / VCC * 1023```, we can rearrange it to calculate the internal reference. When reversed, the formula becomes:
+```internal voltage = (VCC_measured * raw_avg) / 1023```
 
 <p align="center">
   <img src= asset/print.png width="50%" height="50%">
 </p>
 This is the serial output from the code. It reports the bandgap voltage (the internal reference) at about 1.1 V. It is essentially the same as the nominal value, but it was worth confirming, since the actual value can vary from chip to chip.
+
 ### Main code
+
+```cpp
+#include <Arduino.h>          
+#include <Wire.h>             // I2C communication library
+#include <U8g2lib.h>          // U8g2 library for OLED display
+
+// Pin definitions
+const int PIN_DRAIN = A1;     // Analog pin A1: measure drain voltage
+const int R_D       = 999;    // Resistor value (Ohm) between VCC and drain
+float VCC;                    // Supply voltage (to be estimated)
+
+// OLED display object (SSD1306 128x64, I2C, no reset pin)
+U8G2_SSD1306_128X64_VCOMH0_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
+
+// Function to read internal 1.1V bandgap reference
+int readBandgapRaw() {
+  ADMUX = _BV(REFS0) | 0x0E;      // Select internal 1.1V bandgap channel, reference = AVcc
+  delay(2);                       // Allow settling time after switching channel
+  ADCSRA |= _BV(ADSC);            // Start ADC conversion
+  while (ADCSRA & _BV(ADSC)) { }  // Wait until conversion is finished
+  return ADC;                     // Return raw ADC value (0~1023)
+}
+
+void setup() {
+  Serial.begin(115200);           // Initialize serial communication at 115200 baud
+
+  u8g2.begin();                   // Initialize OLED display
+  u8g2.enableUTF8Print();         // Enable UTF-8 print (safe even if not used)
+
+  VCC = (1.1 * 1023.0) / readBandgapRaw();  // Estimate VCC using bandgap method
+}
+
+void loop() {
+  delay(100);                     // Delay for stability after FET setup
+
+  int raw = analogRead(PIN_DRAIN);            // Read ADC value from drain node
+  float Vd = raw * (VCC / 1023.0);            // Convert raw ADC value to voltage
+
+  float Idss = (VCC - Vd) / R_D;              // Calculate drain current (A)
+  float Idss_mA = Idss * 1000.0;              // Convert to mA
+
+  Serial.print("Vd = "); Serial.print(Vd, 3);               // Print drain voltage
+  Serial.print(" V, Idss = "); Serial.print(Idss_mA, 2);    // Print drain current
+  Serial.println(" mA");
+
+  u8g2.clearBuffer();             // Clear OLED buffer
+  u8g2.setFont(u8g2_font_ncenB08_tr);  // Set font
+
+  u8g2.setCursor(0, 12);          // Set cursor position
+  u8g2.print("JFET Idss Test");   // Print title
+
+  u8g2.setCursor(0, 28);          
+  u8g2.print("Vd: "); u8g2.print(Vd, 2); u8g2.print(" V");   // Print drain voltage
+
+  u8g2.setCursor(0, 44);
+  u8g2.print("Idss: "); u8g2.print(Idss_mA, 1); u8g2.print(" mA"); // Print Idss
+
+  u8g2.sendBuffer();              // Send buffer content to OLED
+
+  delay(200);                     // Small delay before next loop
+}
+
+```
+<!--This main code includes  measuring process, voltage calibration I explained by this far. It reads internal voltage, calibrates VCC with it. And with calibrated VCC, It can measure Vd correctly, to calculate Idss. And print it on the OLED module. The OLED display object(U8G2_SSD1306_128X64_VCOMH0_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE)) is preference from "https://github.com/olikraus/u8g2/wiki/u8g2setupcpp". Even If they are same display driver(SSD1306), same resolution (128X64), there is three versions of them (NONAME / VCOMH0 / ALT0). As SSD1306 modules slightly differ by manufacturer, and the seller don't know about which version works, I tried them all. And, VCOMH0 worked for me.-->
+
+This main code includes the **measuring process and voltage calibration** I described earlier.
+It reads the internal bandgap reference voltage and uses it to calibrate VCC.
+With this calibrated VCC, the drain voltage (Vd) can be measured accurately,
+which allows the calculation of Idss.
+The results are then printed on the OLED module.
+
+The OLED display object:
+
+    U8G2_SSD1306_128X64_VCOMH0_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
+
+was chosen based on the reference from [the official U8g2 setup page](https://github.com/olikraus/u8g2/wiki/u8g2setupcpp).
+
+Even though these modules all use the same display driver (**SSD1306**) and the same resolution (**128×64**),
+the library provides three versions of the constructor: **NONAME / VCOMH0 / ALT0**.
+This is because SSD1306 modules differ slightly depending on the manufacturer,
+and the seller often cannot specify which version will work.
+I tested all three, and for my module the **VCOMH0** version worked correctly.
