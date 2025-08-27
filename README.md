@@ -25,7 +25,7 @@ I also needed a display to easily show the measurement results. This setup, cons
   <img src= asset/sch.png width="80%" height="80%">
 </p>
 
-The circuit is quite simple. D3 digital pin pulls the gate to ground, turning the JFET on. Then, A1 analog pin reads the drain voltage (Vd). Using Ohm’s law (I = V/R), the current (Idss) is calculated internally, where V = Vcc - Vd and R = R_Drain. The result is displayed on an OLED screen via the I²C protocol.
+The circuit is quite simple. Gate and source are tied to GND to ensure Vgs = 0, keeping the channel fully open. Then, A1 analog pin reads the drain voltage (Vd). Using Ohm’s law (I = V/R), the current (Idss) is calculated internally, where V = Vcc - Vd and R = R_Drain. The result is displayed on an OLED screen via the I²C protocol.
 
 ## Hardware Implementation
 
