@@ -196,3 +196,6 @@ the library provides three versions of the constructor: **NONAME / VCOMH0 / ALT0
 This is because SSD1306 modules differ slightly depending on the manufacturer,
 and the seller often cannot specify which version will work.
 I tested all three, and for my module the **VCOMH0** version worked correctly.
+
+## Hardware Demonstration
+You can watch the demonstration video through below image link. I merged two video in it. First video demonstrates VCC calibration, as there is no JFET in the socket, Vd directly means VCC. In the second video, you can see Idss changes among different JFETs.
