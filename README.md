@@ -29,7 +29,7 @@ The circuit is quite simple. Gate and source are tied to GND to ensure Vgs = 0, 
 
 ## Hardware Implementation
 
-Since this is not a complex circuit, I built it on a prototype PCB, connecting the components with jumper wires. The completed circuit can be seen in the picture below. You may also notice the red module and parallel header sockets, which are used for an op-amp tester I am currently working on. The Arduino and other modules are attached using header sockets.
+Since this is not a complex circuit, I built it on a prototype PCB and connected the components with jumper wires. The completed circuit can be seen in the picture below. You may also notice the red module, two series resistors, and parallel header sockets, which are part of an op-amp tester I am currently working on. The Arduino and other modules are attached using header sockets.
 
 <p align="center">
   <img src= asset/C1.jpg width="50%" height="50%">
@@ -204,3 +204,8 @@ In the first part, I demonstrate VCC calibration. Since no JFET is inserted in t
 
 In the second part, you can see how Idss varies among different JFETs. I demonstrated both types of sockets: one for bent leads and the other for straight leads.
 [![Video Label](http://img.youtube.com/vi/WLm-msQ3tJI/0.jpg)](https://youtu.be/WLm-msQ3tJI)
+
+## Conclusion
+Although this is not a complicated project, it was rewarding, as I was able to implement a functional idea into working hardware. While implementing VCC calibration, I realized that this kind of logic is essential for every measurement equipment. This experience will also be helpful when working with more advanced microcontrollers in future projects.
+
+Thanks for reading this far!
