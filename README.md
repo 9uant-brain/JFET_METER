@@ -199,3 +199,4 @@ I tested all three, and for my module the **VCOMH0** version worked correctly.
 
 ## Hardware Demonstration
 You can watch the demonstration video through below image link. I merged two video in it. First video demonstrates VCC calibration, as there is no JFET in the socket, Vd directly means VCC. In the second video, you can see Idss changes among different JFETs.
+[![Video Label](http://img.youtube.com/vi/WLm-msQ3tJI/0.jpg)](https://youtu.be/WLm-msQ3tJI)
