@@ -202,6 +202,7 @@ You can watch the demonstration video through the image link below. I combined t
 In the first part, I demonstrate VCC calibration. Since no JFET is inserted in the socket, Vd directly represents VCC. The first cable shows a slightly lower voltage because it is powered by a USB hub, while the second cable shows a higher voltage as it is powered by a DC adapter.
 
 In the second part, you can see how Idss varies among different JFETs. I demonstrated both types of sockets: one for bent leads and the other for straight leads.
+
 [![Video Label](http://img.youtube.com/vi/WLm-msQ3tJI/0.jpg)](https://youtu.be/WLm-msQ3tJI)
 
 ## Conclusion
