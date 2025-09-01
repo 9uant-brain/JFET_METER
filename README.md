@@ -2,7 +2,7 @@
 ## Why I made this
 JFETs are tricky—and that very quirkiness is what makes them irreplaceable, especially in audio. How do I deal with it? I usually measure and bin parts by Idss. Even devices from the same production lot can vary widely.
 
-That said, there’s a parameter more informative than Idss: Vgm (i.e., transconductance, gm). Because a JFET is a voltage-controlled device, gm—the slope of the Id–Vgs curve—captures the device’s sensitivity to gate-voltage control. Idss is still the more commonly cited spec, even though it’s just the maximum drain current at Vgs = 0. There are good reasons for that:
+That said, there’s a parameter more informative than Idss — gm (i.e., transconductance). Because a JFET is a voltage-controlled device, gm—the slope of the Id–Vgs curve—captures the device’s sensitivity to gate-voltage control. Idss is still the more commonly cited spec, even though it’s just the maximum drain current at Vgs = 0. There are good reasons for that:
 
 1. Idss is much easier to measure. It’s simply the drain current at zero gate bias. Estimating gm requires measuring several Id points at different Vgs values to determine the slope.
 2. Idss correlates with gm, so it’s a useful and valid proxy for quick screening, despite being simpler.
@@ -76,7 +76,6 @@ int readBandgapRaw() {
   ADCSRA |= _BV(ADSC);       // kick off conversion
   while (ADCSRA & _BV(ADSC)) { }  // wait until conversion is done
   return ADC;                // raw ADC value (0~1023)
-}
 }
 
 void setup() {
@@ -206,6 +205,6 @@ In the second part, you can see how Idss varies among different JFETs. I demonst
 [![Video Label](http://img.youtube.com/vi/WLm-msQ3tJI/0.jpg)](https://youtu.be/WLm-msQ3tJI)
 
 ## Conclusion
-Although this is not a complicated project, it was rewarding, as I was able to implement a functional idea into working hardware. While implementing VCC calibration, I realized that this kind of logic is essential for every measurement equipment. This experience will also be helpful when working with more advanced microcontrollers in future projects.
+Although this is not a complicated project, it was rewarding, as I was able to implement a functional idea into working hardware. While implementing VCC calibration, I realized that this kind of logic is essential for measurement equipment. This experience will also be helpful when working with more advanced microcontrollers in future projects.
 
 Thanks for reading this far!
