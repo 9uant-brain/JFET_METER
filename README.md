@@ -1,4 +1,4 @@
-# JFET_METER
+
 ## Why I made this
 JFETs are tricky—and that very quirkiness is what makes them irreplaceable, especially in audio. How do I deal with it? I usually measure and bin parts by Idss. Even devices from the same production lot can vary widely.
 
