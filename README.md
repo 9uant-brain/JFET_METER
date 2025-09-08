@@ -60,7 +60,7 @@ In the Arduino Nano (ATmega328P), there is an internal reference voltage of 1.1 
 
 Normally, all analog voltage measurements are referenced to VCC. Therefore, when we attempt to measure the internal reference itself, the result is influenced by VCC. Even though the internal reference is fixed at 1.1 V, without knowing the exact value of VCC, the measured result will not appear as 1.1 V.
 
-However, this relationship can be used in reverse. If the measured value of the internal reference appears higher than expected, it indicates that VCC is higher (since the measurement ∝ 1.1 / VCC). Conversely, if the measured value is lower, it means VCC is lower. This inverse proportionality allows us to indirectly calculate the actual VCC.
+However, this relationship can be used in reverse. If the measured value of the internal reference appears higher than expected, it indicates that VCC is lower (since the measurement ∝ 1.1 / VCC). Conversely, if the measured value is lower, it means VCC is higher. This inverse proportionality allows us to indirectly calculate the actual VCC.
 
 ---
 Before implementing the calibration logic, I discovered that the internal reference voltage varies slightly between devices. To make the measurement more precise, I needed to determine the actual internal voltage. Since it cannot be measured directly through physical pins, I had to infer it using ADC raw data.
